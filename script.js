@@ -1,5 +1,40 @@
 document.addEventListener("DOMContentLoaded", () => {
+       // ── Theme toggle ──────────────────────────────────────────────
+        // Two buttons (setup + quiz panel) — both stay in sync
+        const themeButtons = [
+            {
+                btn:  document.getElementById("theme-toggle-btn"),
+                sun:  document.getElementById("theme-icon-sun"),
+                moon: document.getElementById("theme-icon-moon")
+            },
+            {
+                btn:  document.getElementById("theme-toggle-btn-quiz"),
+                sun:  document.getElementById("theme-icon-sun-quiz"),
+                moon: document.getElementById("theme-icon-moon-quiz")
+            }
+        ];
+        const metaScheme = document.querySelector('meta[name="color-scheme"]');
 
+        function applyTheme(theme) {
+            document.documentElement.setAttribute("data-theme", theme);
+            metaScheme.content = theme;
+            localStorage.setItem("color-scheme", theme);
+            themeButtons.forEach(({ sun, moon }) => {
+                sun.style.display  = theme === "dark" ? "block" : "none";
+                moon.style.display = theme === "dark" ? "none"  : "block";
+            });
+        }
+
+        // Initialise to whatever theme is already active
+        applyTheme(document.documentElement.getAttribute("data-theme") || "light");
+
+        // Both buttons trigger the same toggle
+        themeButtons.forEach(({ btn }) => {
+            btn.addEventListener("click", () => {
+                const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+                applyTheme(next);
+            });
+        });
     // ================================================================
     // 1. CONFIG
     // ================================================================
@@ -478,7 +513,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!backBtn) {
             backBtn = document.createElement("a");
             backBtn.id        = "results-back-btn";
-            backBtn.href      = "../index.html";
+            backBtn.href      = "https://dev-agency-liart-five.vercel.app/";
             backBtn.className = "btn btn-outline-secondary btn-sm";
             backBtn.style.cssText = "position:absolute; top:0.75rem; left:0.75rem; font-size:0.78rem; z-index:10;";
             backBtn.innerHTML = "&larr; Back to Portfolio";

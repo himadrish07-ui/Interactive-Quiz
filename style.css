@@ -230,6 +230,47 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
 /* ================================================================
+   THEME TOGGLE BUTTON
+   Sits in the top-right corner of the card, present on every panel.
+   Icon-only: small, borderless, blends with the card surface.
+   ================================================================ */
+#theme-toggle-btn,
+#theme-toggle-btn-quiz {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    flex-shrink: 0;
+}
+
+#theme-toggle-btn:hover,
+#theme-toggle-btn-quiz:hover {
+    background: var(--bg-surface);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+#theme-toggle-btn:focus-visible,
+#theme-toggle-btn-quiz:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+#theme-toggle-btn svg,
+#theme-toggle-btn-quiz svg {
+    display: block;
+    flex-shrink: 0;
+}
+
+/* ================================================================
    RESULTS — score hero
    ================================================================ */
 #results-hero {
